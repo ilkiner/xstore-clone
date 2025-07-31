@@ -1,0 +1,131 @@
+.footer {
+    background-color: #222;
+    color: white;
+    padding: 60px 0 30px 0;
+    font-family: "Inter", sans-serif;
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 40px;
+
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: 40px;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .logoSection {
+        img {
+            width: 166px;
+            margin-bottom: 15px;
+        }
+
+        .contactInfo {
+            h5 {
+                margin-bottom: 5px;
+                font-size: 14px;
+                font-weight: 400;
+                color: #aaa;
+            }
+
+            h3 {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: white;
+            }
+
+            p {
+                font-size: 14px;
+                color: #ccc;
+                margin-bottom: 6px;
+            }
+
+            a {
+                color: #00bfa5;
+                text-decoration: underline;
+                font-size: 14px;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            .socialIcons {
+                display: flex;
+                gap: 12px;
+                margin-top: 18px;
+
+                i {
+                    font-size: 18px;
+                    color: white;
+                    transition: color 0.3s;
+
+                    &:hover {
+                        color: #00bfa5;
+                    }
+                }
+            }
+        }
+    }
+
+    .menuList {
+        h4 {
+            font-size: 18px;
+            margin-bottom: 14px;
+            color: #ccc;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+                margin-bottom: 10px;
+
+                a {
+                    color: white;
+                    font-size: 14px;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #00bfa5;
+                    }
+                }
+            }
+        }
+    }
+
+    .bottomBar {
+        border-top: 1px solid #444;
+        margin-top: 50px;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        p {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .payments {
+            display: flex;
+            gap: 16px;
+
+            img {
+                height: 30px;
+                object-fit: contain;
+            }
+        }
+    }
+}
