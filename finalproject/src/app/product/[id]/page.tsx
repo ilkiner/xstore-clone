@@ -72,7 +72,7 @@ const handleAddToCart = () => {
   }
 
   if (!data) {
-    alert('Product data is not loaded.');
+    alert('Product not loaded yet.');
     return;
   }
 
@@ -87,6 +87,8 @@ const handleAddToCart = () => {
     })
   );
 };
+
+
 
 
 
