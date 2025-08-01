@@ -70,17 +70,16 @@ const ProductDetailPage = () => {
       return;
     }
 
-    dispatch(
-      addToCart({
-        id: data._id,
-        name: data.name,
-        price: data.price,
-        quantity: selectedQty,
-        image: data.image,
-        color: selectedColor || '',
-      })
-    );
-  };
+if (!data) return <div>Loading...</div>;
+
+dispatch(
+  addToCart({
+    id: data._id,
+    name: data.name,
+    ...
+  })
+);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
