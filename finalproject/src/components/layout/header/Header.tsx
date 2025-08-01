@@ -6,15 +6,20 @@ import MainNavbar from '../navbar/MainNavbar';
 import CartDrawer from '@/components/shop/CartDrawer';
 import ProductQuickView from '@/components/shop/ProductQuickView';
 
+interface QuickViewProduct {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  color?: string;
+  inStock?: boolean;
+  rating?: number;
+}
+
 const Header = () => {
   const [cartOpen, setCartOpen] = useState(false);
-  const [quickViewOpen, setQuickViewOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null); 
-
-  const handleQuickView = (product: any) => {
-    setSelectedProduct(product);
-    setQuickViewOpen(true);
-  };
+  const [quickViewOpen] = useState(false);
+  const [selectedProduct] = useState<QuickViewProduct | null>(null);
 
   return (
     <>

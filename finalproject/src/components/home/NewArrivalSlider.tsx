@@ -26,7 +26,7 @@ type Product = {
 const NewArrivalSlider = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [quickViewOpen, setQuickViewOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const NewArrivalSlider = () => {
         let productIds: string[] = [];
         if (cfgRes.ok) {
           const cfgData = await cfgRes.json();
-          productIds = (cfgData.productIds || []).map((p: any) => p._id);
+          productIds = (cfgData.productIds || []).map((p: { _id: string }) => p._id);
         }
 
        

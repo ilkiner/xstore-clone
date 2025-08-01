@@ -15,7 +15,15 @@ interface ProductCardProps {
   image: string;
   hoverImage?: string;
   color: string;
-  onQuickView: (product: any) => void;
+  onQuickView: (product: {
+    _id: string;
+    name: string;
+    price: number;
+    image: string;
+    color?: string;
+    inStock?: boolean;
+    rating?: number;
+  }) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({

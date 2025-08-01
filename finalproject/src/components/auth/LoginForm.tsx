@@ -55,7 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
       alert('Login successful');
       onSuccess?.();
-    } catch (err) {
+    } catch {
       alert('Server error');
     }
   };
