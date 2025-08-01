@@ -8,7 +8,7 @@ const PromotionSection = () => {
       <div className="bg-[#e6f3f2] rounded-xl w-[500px] ml-24  overflow-hidden relative h-60 md:h-60 flex items-center justify-between px-6">
         <div className="z-10">
           <h3 className="text-lg font-semibold mb-2">
-            Didn't Find Anything Interesting?
+            Didn&apos;t Find Anything Interesting?
           </h3>
           <p className="text-gray-600 text-sm mb-2">
             Perhaps you will find something among our promotions!

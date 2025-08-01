@@ -19,7 +19,6 @@ const getAuthHeader = () => {
 
 export default function ManageHomePage() {
   const router = useRouter();
-  const [hero, setHero] = useState<HeroSection | null>(null);
   const [form, setForm] = useState<HeroSection>({ title: '', subtitle: '', imgUrl: '' });
   const [loadingHero, setLoadingHero] = useState(true);
   const [heroError, setHeroError] = useState<string | null>(null);
@@ -43,10 +42,15 @@ export default function ManageHomePage() {
         const res = await axios.get('http://localhost:5000/api/home/hero', {
           headers: { ...getAuthHeader() },
         });
-        setHero(res.data);
         setForm(res.data);
-      } catch (err: any) {
-        setHeroError(err.response?.data?.message || err.message);
+      } catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+          setHeroError(err.response?.data?.message || err.message);
+        } else if (err instanceof Error) {
+          setHeroError(err.message);
+        } else {
+          setHeroError('An error occurred');
+        }
       } finally {
         setLoadingHero(false);
       }
@@ -61,10 +65,16 @@ export default function ManageHomePage() {
           }),
         ]);
         setAllProducts(productsRes.data);
-        const ids: string[] = (configRes.data.productIds || []).map((p: any) => p._id);
+        const ids: string[] = (configRes.data.productIds || []).map((p: { _id: string }) => p._id);
         setSelectedIds(ids);
-      } catch (err: any) {
-        setArrivalsError(err.response?.data?.message || err.message);
+      } catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+          setArrivalsError(err.response?.data?.message || err.message);
+        } else if (err instanceof Error) {
+          setArrivalsError(err.message);
+        } else {
+          setArrivalsError('An error occurred');
+        }
       } finally {
         setLoadingArrivals(false);
       }
@@ -78,13 +88,18 @@ export default function ManageHomePage() {
     if (savingHero) return;
     setSavingHero(true);
     try {
-      const res = await axios.put('http://localhost:5000/api/home/hero', form, {
+      await axios.put('http://localhost:5000/api/home/hero', form, {
         headers: { ...getAuthHeader() },
       });
-      setHero(res.data);
       alert('Hero updated');
-    } catch (err: any) {
-      setHeroError(err.response?.data?.message || err.message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setHeroError(err.response?.data?.message || err.message);
+      } else if (err instanceof Error) {
+        setHeroError(err.message);
+      } else {
+        setHeroError('An error occurred');
+      }
     } finally {
       setSavingHero(false);
     }
@@ -104,8 +119,14 @@ export default function ManageHomePage() {
         { headers: { ...getAuthHeader() } }
       );
       alert('New Arrivals updated');
-    } catch (err: any) {
-      setArrivalsError(err.response?.data?.message || err.message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setArrivalsError(err.response?.data?.message || err.message);
+      } else if (err instanceof Error) {
+        setArrivalsError(err.message);
+      } else {
+        setArrivalsError('An error occurred');
+      }
     } finally {
       setSavingArrivals(false);
     }

@@ -6,9 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/store/cartSlice';
 import { RiHeartLine, RiShoppingCart2Line } from 'react-icons/ri';
 
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  hoverImage?: string;
+  color?: string;
+  inStock?: boolean;
+  rating?: number;
+}
+
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedQty, setSelectedQty] = useState(1);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
@@ -16,10 +27,10 @@ const ProductDetailPage = () => {
 
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<Array<{ username: string; rating: number; comment: string }>>([]);
 
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user?.user);
+  const user = useSelector((state: { user?: { user: unknown } }) => state.user?.user);
 
   useEffect(() => {
     if (!id) return;
@@ -263,7 +274,7 @@ const ProductDetailPage = () => {
             <div>
               <h3 className="font-bold mb-2">Customer Reviews</h3>
               {reviews.length === 0 && <p>No reviews yet.</p>}
-              {reviews.map((r: any, idx: number) => (
+              {reviews.map((r, idx: number) => (
                 <div key={idx} className="border-b py-2">
                   <p className="font-semibold">{r.username} {'★'.repeat(r.rating)}</p>
                   <p>{r.comment}</p>

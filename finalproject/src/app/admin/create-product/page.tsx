@@ -37,8 +37,14 @@ export default function CreateProductPage() {
         }
       );
       router.push('/admin/shop');
-    } catch (e: any) {
-      setError(e.response?.data?.message || 'Creation failed');
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.message || 'Creation failed');
+      } else if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError('Creation failed');
+      }
     }
   };
 

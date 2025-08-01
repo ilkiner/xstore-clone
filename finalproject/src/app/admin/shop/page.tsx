@@ -40,8 +40,14 @@ export default function ManageShop() {
       ]);
       setProducts(prodRes.data);
       setCategories(catRes.data);
-    } catch (e: any) {
-      setError(e.response?.data?.message || 'Load failed');
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.message || 'Load failed');
+      } else if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError('Load failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -84,9 +90,15 @@ export default function ManageShop() {
         image: '',
       });
       alert('Product created');
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error('Create error', e);
-      setError(e.response?.data?.message || 'Create failed');
+      if (axios.isAxiosError(e)) {
+        setError(e.response?.data?.message || 'Create failed');
+      } else if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError('Create failed');
+      }
     } finally {
       setCreating(false);
     }
